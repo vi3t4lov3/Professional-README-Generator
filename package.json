@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@inquirer/editor": "^0.0.13-alpha.0",
     "inquirer": "^8.2.4",
     "require": "^2.4.20"
   }
