@@ -1,14 +1,13 @@
 const inquire = require('inquirer');
 const fs = require('fs');
 
-//Questions
+//Questions VIM i to insert then esc to exit + :x to save 
 const questions = [
   { 
   type: 'input',
   name: 'title',
   message: 'What is your repository name?',
   validate: (answer) => {
-  // (answer === '') ? 'Please enter a valid title' : 'true';
     if (answer === '') { return 'Please enter a valid title'}; return true}
   },
   { 
@@ -23,9 +22,6 @@ const questions = [
   name: 'dependencies',
   message: 'Technologies / Skill you using on this repository',
   choices: ['HTML', 'CSS', 'Javascript', 'Python', 'Java'],
-  default: 'NONE'
-  // validate: (answer) => {
-  //   if (answer === '') { return 'You had not selected your languages'}; return true}
   },
   { 
   type: 'editor',
@@ -60,7 +56,6 @@ const questions = [
   name: 'githubUser',
   message: 'What is your Github username?',
   validate: (answer) => {
-  // (answer === '') ? 'Please enter a valid title' : 'true';
     if (answer === '') { return 'Please enter a valid username'}; return true}
   },
   {
@@ -68,7 +63,6 @@ const questions = [
     name: 'email',
     message: 'What is your email?',
     validate: (answer) => {
-    // (answer === '') ? 'Please enter a valid title' : 'true';
       if (answer === '') { return 'Please enter a valid email'}; return true}
   },
   {
@@ -76,20 +70,18 @@ const questions = [
     name: 'demo',
     message: 'Please enter your demo link here?',
     validate: (answer) => {
-    // (answer === '') ? 'Please enter a valid title' : 'true';
       if (answer === '') { return 'Please enter a valid links'}; return true}
   },
   {
-    type: 'checkbox',
+    type: 'list',
     name: 'license',
     message: 'What kind of license should your project have?',
-    choices: ['Apache 2.0', 'MIT', 'GNU GPL v3.0'],
-    default: 'NONE'
-    // validate: (answer) => {
-    //   if (answer === '') { return 'You had not selected your license'}; return true}
+    choices: ['None', 'Apache 2.0', 'MIT', 'GNU GPL 3.0'],
+    default: 'None'
     },
 ];
 
+//add the - & \n for each value when value had been selected
 const promptUser = (questions) => {
    return inquire.prompt(questions);
 };
@@ -105,6 +97,21 @@ const generateCustomDisplay = (answers) => {
   }
   return response;
 };
+// display the license 
+function generateLicenseBadge(license) {
+  if (license === 'Apache 2.0') {
+    return `[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
+  } if (license === 'MIT') { 
+    return `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
+  } if (license === 'GNU GPL 3.0') { 
+    return `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`
+  } if (license === 'None') { 
+    return `No License found`
+  }
+  //if it empty
+  { return `Feel free to do whatever you want to do with my code`
+ } 
+}
 
 //template README 
 const generateREADME = ({ title, description, installation, dependencies, usage, contribute, license, githubUser, test, email, demo}) =>
@@ -137,7 +144,7 @@ ${test}
 If you have questions about this repository reach me by Github: [${githubUser}](https://github.com/${githubUser})
 or send an email: ${email} 
 ## License
-${generateCustomDisplay(license)}
+${generateLicenseBadge(license)} 
 `;
 
 //initial
@@ -150,3 +157,5 @@ const init = () => {
   };
   
   init();
+
+  
