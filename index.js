@@ -126,7 +126,7 @@ ${description}
 * [Contribute](#contribute)
 * [Tests](#tests)
 * [Questions](#questions)
-* [Demo] (#demo)
+* [Demo](#demo)
 * [License](#license)
 ## Dependencies
 ${generateCustomDisplay(dependencies)}
@@ -134,7 +134,7 @@ ${generateCustomDisplay(dependencies)}
 ${installation}
 ## Usage
 ${usage}
-## Contributing
+## Contribute
 ${contribute}
 ## Tests
 ${test}
